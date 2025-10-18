@@ -12,9 +12,11 @@ public static class DependencyInjection
     {
         services.AddDbContext<StoreContext>(option =>
         {
-            option.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            option.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
+            //option.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
         services.AddScoped<IStoreContext>(provider => provider.GetService<StoreContext>());
+        services.AddScoped<IProductRepo, ProductRepo>();
         return services;
     }
 }
