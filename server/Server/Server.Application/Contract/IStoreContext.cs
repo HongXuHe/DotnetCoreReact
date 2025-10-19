@@ -5,7 +5,7 @@ namespace Server.Application.Contract;
 
 public interface IStoreContext
 {
-    DbSet<Product> Products { get; }
+    DbSet<Activity> Activities { get; }
     
     int SaveChanges();
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

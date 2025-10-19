@@ -16,7 +16,7 @@ public static class DependencyInjection
             //option.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         });
         services.AddScoped<IStoreContext>(provider => provider.GetService<StoreContext>());
-        services.AddScoped<IProductRepo, ProductRepo>();
+        services.AddScoped<IActivityRepo, ActivityRepo>();
         return services;
     }
 }

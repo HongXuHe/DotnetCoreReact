@@ -10,6 +10,6 @@ public class StoreContext:DbContext,IStoreContext
     {
         
     }
-
-    public DbSet<Product> Products => Set<Product>();
+    
+    public DbSet<Activity> Activities => Set<Activity>();
 }

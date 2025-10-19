@@ -3,10 +3,9 @@ using Server.Core.Entities;
 
 namespace Server.Infrastructure.Implementation;
 
-public class ProductRepo:BaseRepo<Product>,IProductRepo
+public class ActivityRepo:BaseRepo<Activity>,IActivityRepo
 {
-    public ProductRepo(IStoreContext context) : base(context)
+    public ActivityRepo(IStoreContext context) : base(context)
     {
-        
     }
 }
