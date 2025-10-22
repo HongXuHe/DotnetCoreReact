@@ -1,4 +1,5 @@
 using System.Reflection;
+using Newtonsoft.Json;
 using Server.Application.Contract;
 using Server.Application.Features.Activity;
 using Server.Application.Features.Activity.Query;
@@ -9,7 +10,11 @@ using Server.Infrastructure.Implementation;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+});;
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(c => c.AddProfile(typeof(ActivityProfile)));
 //builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -17,6 +22,10 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(GetActivityByIdQuery).Assembly));
 
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddCors(config =>
+{
+    config.AddPolicy("CorsPolicy", policy =>policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -28,6 +37,7 @@ if (app.Environment.IsDevelopment())
 }
 //app.UseHttpsRedirection();
 InitDb(app.Services);
+app.UseCors("CorsPolicy");
 app.MapControllers();
 app.Run();
 

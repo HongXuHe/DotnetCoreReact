@@ -8,5 +8,7 @@ public class ActivityProfile: Profile
     public ActivityProfile()
     {
         CreateMap<ActivityEntity, ActivityDto>().ReverseMap();
+        CreateMap<ActivityEntity, CreateActivityDto>().ReverseMap();
+        CreateMap<ActivityEntity, UpdateActivityDto>().ReverseMap();
     }
 }

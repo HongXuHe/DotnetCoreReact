@@ -32,6 +32,7 @@ public class BaseRepo<T> :IBaseRepo<T> where T:BaseEntity
         if (_context.Set<T>().Any(x => x.Id == id))
         {
             _context.Set<T>().Remove(await GetByIdAsync(id));
+            await _context.SaveChangesAsync();
         }
     }
 

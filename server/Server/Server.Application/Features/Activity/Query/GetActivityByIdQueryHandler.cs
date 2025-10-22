@@ -22,6 +22,6 @@ public class GetActivityByIdQueryHandler:IRequestHandler<GetActivityByIdQuery,Ac
         {
             return _mapper.Map<ActivityDto>(await _activityRepo.GetByIdAsync(request.Id));
         }
-        return null;
+        throw new KeyNotFoundException("Activity Not Found");
     }
 }
